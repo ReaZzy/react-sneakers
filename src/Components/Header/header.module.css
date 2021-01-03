@@ -1,0 +1,35 @@
+.listStyles {
+    margin-left: 10px;
+    color: #F8F8F8;
+    font-size: 25px;
+}
+
+.listStyles a {
+    color: #F8F8F8;
+    text-decoration: none;
+}
+.listStyles a:hover {
+    transition: 0.2s;
+    color: #fdbf07;
+}
+
+.listStyles .active {
+    color: #fdbf07;
+    border-bottom: 1px solid ;
+}
+
+.title a{
+    color: #F8F8F8;
+    text-decoration: none;
+}
+.title .active {
+    color: #fdbf07;
+}
+
+.select{
+    height: 40px;
+    margin-left: 10px;
+    padding: 0 5px 0 10px;
+    border-radius: 10px;
+    outline: none;
+}

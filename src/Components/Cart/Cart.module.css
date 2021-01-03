@@ -1,0 +1,35 @@
+.cartItem {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cartItems {
+    margin: 20px;
+}
+
+.cartItem img {
+    width: 200px;
+}
+.cartItem .title {
+    margin: auto 5px auto 5px;
+    width: 400px;
+}
+
+.cartItem input {
+    height: 38px;
+    margin: 0 5px 0 5px;
+    width: 50px;
+    outline: none;
+    text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+.cartItem .input {
+    margin: auto 5px auto 5px;
+}
+
+.cartItem button {
+    margin-top: -5px;
+}
