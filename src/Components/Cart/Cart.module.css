@@ -9,6 +9,7 @@
 
 .cartItem img {
     width: 200px;
+    height:143px ;
 }
 .cartItem .title {
     margin: auto 5px auto 5px;

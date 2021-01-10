@@ -5,12 +5,13 @@ import {Shoes} from "./Components/Shoes/Shoes";
 import {useDispatch, useSelector} from "react-redux";
 import {Preloader} from "./Components/Preloader/Preloader";
 import {
+    getCart,
     getCurrentBrand,
     getCurrentColorway,
     getCurrentTerm,
     getIsLoading,
 } from "./redux/homepageSelector";
-import {changeCurrency, getSneakers} from "./redux/homepageReducer";
+import {addToCart, changeCurrency, getSneakers} from "./redux/homepageReducer";
 import {Route, Switch, useLocation} from "react-router-dom";
 import {Cart} from "./Components/Cart/Cart";
 import { ToastContainer, toast } from 'react-toastify';
@@ -27,16 +28,31 @@ function App() {
         progress: undefined,
     });
 
-
+    const cart = useSelector(getCart)
     const dispatch = useDispatch()
     const isLoading = useSelector(getIsLoading)
     const currentTerm = useSelector(getCurrentTerm)
     const colorway = useSelector(getCurrentColorway)
     const brand = useSelector(getCurrentBrand)
     let location = useLocation()
+    useEffect(()=>{
+        if (cart.length > 0) {
+            localStorage.setItem("cart", JSON.stringify(cart))
+        }
+    },[cart])
 
     useEffect(()=>{
         dispatch(changeCurrency())
+        if (localStorage.getItem("cart")){
+            //@ts-ignore
+            // eslint-disable-next-line array-callback-return
+            JSON.parse(localStorage.getItem("cart")).map(e =>{
+                for (let i=0; i< e.count;i++){
+                    dispatch(addToCart(e))
+                }
+            })
+        }
+
     }, []) //eslint-disable-line
 
     useEffect(()=>{

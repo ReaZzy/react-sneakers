@@ -32,6 +32,7 @@ export const Cart = (props:any) => {
     const deleteFromCartById = (id:string) => {
         dispatch(deleteFromCart(id))
         notifyDelete(cart.filter((sneaker:any) => sneaker[0].id === id)[0][0].title)
+        if (cart.length ===1) localStorage.removeItem("cart")
     }
 
     let [total, setTotal] = useState([])

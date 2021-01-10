@@ -7,8 +7,6 @@ const reducers = combineReducers({
 })
 type reducersType = typeof reducers
 export type AppStateType = ReturnType<reducersType>
-//@ts-ignore
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-let store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)))
+let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 export default store

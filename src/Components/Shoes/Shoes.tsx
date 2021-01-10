@@ -1,7 +1,7 @@
 import React, { useState} from 'react'
 import s from "./Shoes.module.css"
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentCurrency, getCurrentTerm, getRate, getSneakersSelector} from "../../redux/homepageSelector";
+import {getCart, getCurrentCurrency, getCurrentTerm, getRate, getSneakersSelector} from "../../redux/homepageSelector";
 import {Paginator} from "../Paginator/Paginator";
 import {ShoeMoreInfo} from "./ShoeMoreInfo";
 import Modal from 'react-modal';
@@ -10,6 +10,7 @@ import {addToCart} from "../../redux/homepageReducer";
 export const Shoes = React.memo((props:any) => {
     Modal.setAppElement('#root')
     const rate = useSelector(getRate)
+    const cart = useSelector(getCart)
     const currentCurrency = useSelector(getCurrentCurrency)
     let style = {
         overlay:{
