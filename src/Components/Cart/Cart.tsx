@@ -2,9 +2,9 @@ import React, {useEffect, useState} from "react";
 import s from "./Cart.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import {getCart, getCurrentCurrency, getRate} from "../../redux/homepageSelector";
-import {addItem, deleteFromCart, deleteItem} from "../../redux/homepageReducer";
 import 'react-toastify/dist/ReactToastify.css';
 import {toast} from "react-toastify";
+import {addItem, deleteFromCart, deleteItem} from "../../redux/actions";
 
 export const Cart = (props: any) => {
     const dispatch = useDispatch()
@@ -35,9 +35,9 @@ export const Cart = (props: any) => {
         if (cart.length === 1) localStorage.removeItem("cart")
     }
 
-    let [total, setTotal] = useState([])
+    let [total, setTotal] = useState([] as Array<number>)
     useEffect(() => {
-        setTotal(cart.map((c: any) => c[0].retailPrice * c.count))
+        setTotal(cart.map((c) => c[0].retailPrice * c.count))
     }, [cart])
     const cartItems = cart.map((item: any, i: number) => <div className={s.cartItems} key={i}>
         <div className={s.cartItem}>

@@ -3,8 +3,9 @@ import {Field, Form, Formik } from "formik"
 import React, {useEffect, useState} from "react"
 import { FaSearch } from 'react-icons/fa';
 import {useDispatch, useSelector} from "react-redux";
-import {getSneakers, setCurrentTerm} from "../../redux/homepageReducer";
 import {getCurrentBrand, getCurrentColorway, getCurrentGender, getCurrentTerm} from "../../redux/homepageSelector";
+import {getSneakers} from "../../redux/homepageReducer";
+import {setCurrentTerm} from "../../redux/actions";
 
 
 export const Search = () => {

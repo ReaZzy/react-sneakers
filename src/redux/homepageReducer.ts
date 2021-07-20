@@ -1,7 +1,37 @@
 import {getCurrentCurrencyAPI, getSneakersAPI} from "../Components/dal/api"
+import {setCurrencyRates, setCurrentPage, setCurrentTerm, setLoading, setSneakers, setTotalCount} from "./actions";
+import {ActionTypes} from "./store";
+
+
+export interface IShoe {
+    brand: string
+    colorway: string
+    id: string
+    media: {
+        imageUrl: string | null
+        smallImageUrl: string | null
+        thumbUrl: string | null
+    }
+    name: string
+    releaseDate: string
+    retailPrice: number
+    shoe: string
+    styleId: string
+    title: string
+    year: number
+}
+export interface ISneakers {
+    count: number,
+    results: Array<IShoe>
+}
+
+export interface ICart{
+    [key: number]: IShoe
+    count: number
+}
 
 let initialState = {
-    sneakers: [] as any,
+    sneakers: {} as ISneakers,
     isLoading: true,
     currentPage: 1,
     totalCount: 0,
@@ -9,32 +39,17 @@ let initialState = {
     brand: "",
     colorway: "",
     gender: "",
-
-    cart: [] as any,
+    cart: [] as Array<ICart>,
     finalPrice: 0,
-
     currentCurrency: "USD",
-    currencyRates: {},
+    currencyRates: {} as {[keys: string]: number},
     rate: 1,
 }
 
 type initialStateType = typeof initialState
 
-type ActionsType =
-    setSneakersType
-    | setLoadingType
-    | setCurrentTermType
-    | setCurrentPageType
-    | setTotalCountType
-    | addToCartType
-    | deleteItemType
-    | addItemType
-    | deleteFromCartType
-    | setCurrentCurrencyType
-    | setCurrencyRatesType
-    | setRateType
 
-export const homepageReducer = (state = initialState, action: ActionsType): initialStateType => {
+export const homepageReducer = (state = initialState, action: ActionTypes): initialStateType => {
     switch (action.type) {
         case "SET_SNEAKERS":
             return {...state, sneakers: action.sneakers}
@@ -85,83 +100,12 @@ export const homepageReducer = (state = initialState, action: ActionsType): init
         case "SET_CURRENCY_RATES":
             return {...state, currencyRates: action.rates}
         case "SET_RATE":
-            //@ts-ignore
             return {...state, rate: state.currencyRates[`${action.currency}`]}
         default:
             return state
     }
 }
-type setRateType = {
-    type: "SET_RATE"
-    currency: string
-}
-type setCurrencyRatesType = {
-    type: "SET_CURRENCY_RATES"
-    rates: any
-}
-type deleteItemType = {
-    type: "DELETE_ITEM"
-    id: string
-}
-type setCurrentCurrencyType = {
-    type: "SET_CURRENT_CURRENCY"
-    currency: string
-}
-type deleteFromCartType = {
-    type: "DELETE_FROM_CART"
-    id: string
-}
-type addItemType = {
-    type: "ADD_ITEM"
-    id: string
-}
 
-type addToCartType = {
-    type: "ADD_TO_CART"
-    product: any
-}
-type setSneakersType = {
-    type: "SET_SNEAKERS"
-    sneakers: any
-}
-type setTotalCountType = {
-    type: "SET_TOTAL_COUNT"
-    totalCount: number
-}
-type setCurrentPageType = {
-    type: "SET_CURRENT_PAGE"
-    currentPage: number
-}
-type setCurrentTermType = {
-    type: "SET_CURRENT_TERM"
-    currentTerm: {
-        term: string,
-        brand: string,
-        colorway: string,
-        gender: string,
-    }
-
-}
-type setLoadingType = {
-    type: "SET_LOADING"
-    boolean: boolean
-}
-
-const setSneakers = (sneakers: any) => ({type: "SET_SNEAKERS", sneakers})
-const setLoading = (boolean: boolean) => ({type: "SET_LOADING", boolean})
-const setCurrencyRates = (rates: any) => ({type: "SET_CURRENCY_RATES", rates})
-export const setCurrentPage = (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage})
-export const setRate = (currency: string) => ({type: "SET_RATE", currency})
-export const setCurrentCurrency = (currency: string) => ({type: "SET_CURRENT_CURRENCY", currency})
-export const deleteFromCart = (id: string) => ({type: "DELETE_FROM_CART", id})
-export const addToCart = (product: any) => ({type: "ADD_TO_CART", product})
-export const addItem = (id: string) => ({type: "ADD_ITEM", id})
-export const deleteItem = (id: string) => ({type: "DELETE_ITEM", id})
-export const setTotalCount = (totalCount: number) => ({type: "SET_TOTAL_COUNT", totalCount})
-export const setCurrentTerm = (term: string, brand: string, colorway: string, gender: string) => ({
-    type: "SET_CURRENT_TERM",
-    currentTerm: {term, brand, colorway, gender}
-})
 
 export const getSneakers = (page = initialState.currentPage, title = "", brand = "", gender = "", colorway = "") => async (dispatch: any) => {
     dispatch(setLoading(true))

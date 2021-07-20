@@ -5,7 +5,7 @@ import {NavLink} from 'react-router-dom'
 import s from "./header.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import {getCart} from "../../redux/homepageSelector";
-import {setCurrentCurrency, setRate} from "../../redux/homepageReducer";
+import {setCurrentCurrency, setRate} from "../../redux/actions";
 
 export const Header = () => {
     const dispatch = useDispatch()

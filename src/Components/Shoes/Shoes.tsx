@@ -5,7 +5,7 @@ import {getCurrentCurrency, getCurrentTerm, getRate, getSneakersSelector} from "
 import {Paginator} from "../Paginator/Paginator";
 import {ShoeMoreInfo} from "./ShoeMoreInfo";
 import Modal from 'react-modal';
-import {addToCart} from "../../redux/homepageReducer";
+import {addToCart} from "../../redux/actions";
 
 export const Shoes = React.memo((props: any) => {
     Modal.setAppElement('#root')

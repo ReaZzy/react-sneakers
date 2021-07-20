@@ -11,11 +11,12 @@ import {
     getCurrentTerm,
     getIsLoading,
 } from "./redux/homepageSelector";
-import {addToCart, changeCurrency, getSneakers} from "./redux/homepageReducer";
 import {Route, Switch, useLocation} from "react-router-dom";
 import {Cart} from "./Components/Cart/Cart";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {changeCurrency, getSneakers} from "./redux/homepageReducer";
+import {addToCart} from "./redux/actions";
 
 function App() {
     const notify = (text: string) => toast.warn(`${text} added to cart`, {
