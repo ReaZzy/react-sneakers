@@ -14,11 +14,11 @@ import {
 import {addToCart, changeCurrency, getSneakers} from "./redux/homepageReducer";
 import {Route, Switch, useLocation} from "react-router-dom";
 import {Cart} from "./Components/Cart/Cart";
-import { ToastContainer, toast } from 'react-toastify';
+import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-    const notify = (text:string) => toast.warn(`${text} added to cart`, {
+    const notify = (text: string) => toast.warn(`${text} added to cart`, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -35,19 +35,19 @@ function App() {
     const colorway = useSelector(getCurrentColorway)
     const brand = useSelector(getCurrentBrand)
     let location = useLocation()
-    useEffect(()=>{
+    useEffect(() => {
         if (cart.length > 0) {
             localStorage.setItem("cart", JSON.stringify(cart))
         }
-    },[cart])
+    }, [cart])
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(changeCurrency())
-        if (localStorage.getItem("cart")){
+        if (localStorage.getItem("cart")) {
             //@ts-ignore
             // eslint-disable-next-line array-callback-return
-            JSON.parse(localStorage.getItem("cart")).map(e =>{
-                for (let i=0; i< e.count;i++){
+            JSON.parse(localStorage.getItem("cart")).map(e => {
+                for (let i = 0; i < e.count; i++) {
                     dispatch(addToCart(e))
                 }
             })
@@ -55,51 +55,48 @@ function App() {
 
     }, []) //eslint-disable-line
 
-    useEffect(()=>{
+    useEffect(() => {
         if (location.pathname === "/man") {
             dispatch(getSneakers(1, currentTerm, brand, "men", colorway))
         } else if (location.pathname === "/woman") {
             dispatch(getSneakers(1, currentTerm, brand, "women", colorway))
         } else if (location.pathname === "/child") {
             dispatch(getSneakers(1, currentTerm, brand, "child", colorway))
-        }
-        else if (location.pathname === "/cart") {}
-        else {
+        } else if (location.pathname === "/cart") {
+        } else {
             dispatch(getSneakers(1, currentTerm, brand, "", colorway))
         }
     }, [location.pathname]) // eslint-disable-line
-  return (
-      <>
-          <Header/>
-          <div className="App">
-              <Search/>
-              <Switch>
-                  <Route path={"/cart"} render={()=> <Cart notify={notify}/>}/>
-                  <Route path={"/"} render={()=>isLoading
-                      ? <Preloader/>
-                      : <Shoes notify={notify}/>
-                  }/>
+    return (
+        <>
+            <Header/>
+            <div className="App">
+                <Search/>
+                <Switch>
+                    <Route path={"/cart"} render={() => <Cart notify={notify}/>}/>
+                    <Route path={"/"} render={() => isLoading
+                        ? <Preloader/>
+                        : <Shoes notify={notify}/>
+                    }/>
 
-              </Switch>
-
-
+                </Switch>
 
 
-              <ToastContainer
-                  position="top-right"
-                  autoClose={2000}
-                  hideProgressBar={false}
-                  newestOnTop={false}
-                  closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss
-                  draggable
-                  pauseOnHover
-                  limit={3}
-              />
-          </div>
-      </>
-  );
+                <ToastContainer
+                    position="top-right"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    limit={3}
+                />
+            </div>
+        </>
+    );
 }
 
 export default App;

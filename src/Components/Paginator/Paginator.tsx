@@ -20,15 +20,15 @@ export const Paginator = () => {
     const currentColorway = useSelector(getCurrentColorway)
     const currentGender = useSelector(getCurrentGender)
 
-    const onPageChange = (pageNumber:any) => {
+    const onPageChange = (pageNumber: number) => {
         dispatch(getSneakers(pageNumber, currentTerm, currentBrand, currentGender, currentColorway))
     }
 
-    return(
+    return (
         <Pagination
             activePage={currentPage}
             itemsCountPerPage={50}
-            totalItemsCount={totalCount-50}
+            totalItemsCount={totalCount - 50}
             pageRangeDisplayed={5}
             onChange={onPageChange}
             activeClass={s.active}

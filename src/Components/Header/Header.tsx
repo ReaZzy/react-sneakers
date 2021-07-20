@@ -1,42 +1,52 @@
 import React, {useEffect, useState} from "react";
-import { Col, Row } from "react-bootstrap";
-import { FaShoppingCart } from 'react-icons/fa';
+import {Col, Row} from "react-bootstrap";
+import {FaShoppingCart} from 'react-icons/fa';
 import {NavLink} from 'react-router-dom'
 import s from "./header.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import {getCart} from "../../redux/homepageSelector";
 import {setCurrentCurrency, setRate} from "../../redux/homepageReducer";
 
-export const Header = () =>{
+export const Header = () => {
     const dispatch = useDispatch()
     const cart = useSelector(getCart)
     const [totalItems, setTotalItems] = useState(0)
-    const setCurCurrency = (e:any) => {
+    const setCurCurrency = (e: any) => {
         dispatch(setCurrentCurrency(e.target.value))
         dispatch(setRate(e.target.value))
     }
 
-    useEffect(()=>{
-        if (!!cart){
-            setTotalItems(cart.reduce((a:number,b:any):number=>{
-                return a+b.count
+    useEffect(() => {
+        if (!!cart) {
+            setTotalItems(cart.reduce((a: number, b: any): number => {
+                return a + b.count
             }, 0))
         }
-    },[cart])
+    }, [cart])
 
     return (
         <header>
-            <Row style={{padding:"15px 0px 15px 0px", backgroundColor:"#0e1111"}}>
-                <Col style={{textAlign:"center", color:"#F8F8FF"}}>
-                    <h2 className={"unselectable "+ s.title}><NavLink exact to={"/"} activeClassName={s.active}>FOOT SHOP</NavLink ></h2>
+            <Row style={{padding: "15px 0px 15px 0px", backgroundColor: "#0e1111"}}>
+                <Col style={{textAlign: "center", color: "#F8F8FF"}}>
+                    <h2 className={"unselectable " + s.title}><NavLink exact to={"/"} activeClassName={s.active}>FOOT
+                        SHOP</NavLink></h2>
                 </Col>
                 <Col className={"d-flex justify-content-center"}>
-                    <div className={"unselectable "+s.listStyles}> <NavLink to={"/man"} activeClassName={s.active}>Мужчинам</NavLink></div>
-                    <div className={"unselectable "+s.listStyles}> <NavLink to={"/woman"} activeClassName={s.active}>Женщинам</NavLink></div>
-                    <div className={"unselectable "+s.listStyles}> <NavLink to={"/child"} activeClassName={s.active}>Детям</NavLink></div>
+                    <div className={"unselectable " + s.listStyles}><NavLink to={"/man"}
+                                                                             activeClassName={s.active}>Мужчинам</NavLink>
+                    </div>
+                    <div className={"unselectable " + s.listStyles}><NavLink to={"/woman"}
+                                                                             activeClassName={s.active}>Женщинам</NavLink>
+                    </div>
+                    <div className={"unselectable " + s.listStyles}><NavLink to={"/child"}
+                                                                             activeClassName={s.active}>Детям</NavLink>
+                    </div>
                 </Col>
-                <Col style={{textAlign:"center"}}>
-                    <NavLink to={"/cart"} activeClassName={s.active}><button className={"btn btn-warning"}><strong>{!!totalItems && totalItems}</strong> <FaShoppingCart size={"25px"} color={"#0e1111"}/></button></NavLink>
+                <Col style={{textAlign: "center"}}>
+                    <NavLink to={"/cart"} activeClassName={s.active}>
+                        <button className={"btn btn-warning"}><strong>{!!totalItems && totalItems}</strong>
+                            <FaShoppingCart size={"25px"} color={"#0e1111"}/></button>
+                    </NavLink>
                     <select onChange={setCurCurrency} id="currency" name="currency" className={s.select}>
                         <option value="USD">USD</option>
                         <option value="CAD">CAD</option>

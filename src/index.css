@@ -6,63 +6,72 @@ html, body {
 
 .unselectable {
     -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none;   /* Chrome/Safari/Opera */
-    -khtml-user-select: none;    /* Konqueror */
-    -moz-user-select: none;      /* Firefox */
-    -ms-user-select: none;       /* Internet Explorer/Edge */
-    user-select: none;           /* Non-prefixed version, currently
-                                  not supported by any browser */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -khtml-user-select: none; /* Konqueror */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                           not supported by any browser */
 }
 
-header{
+header {
     overflow: hidden;
     position: fixed;
-    top:0;
+    top: 0;
     width: 100%;
     display: block;
 }
+
 .App {
     display: block;
 }
-label{
+
+label {
     color: #F8F8F8;
     font-size: 15px;
 }
+
 option {
-    font-size:15px;
-    font-weight:bold;
+    font-size: 15px;
+    font-weight: bold;
 }
-.search{
-    display:block;
-    background-color:#0e1111;
+
+.search {
+    display: block;
+    background-color: #0e1111;
     width: 100%;
     padding-top: 10px;
     padding-bottom: 10px;
     margin-top: -3px;
 }
 
-@media screen and (min-width: 161px){
-    .App{
+@media screen and (min-width: 161px) {
+    .App {
         margin-top: 154px;
     }
 }
+
 @media screen and (min-width: 470px) {
-    .App{
+    .App {
         margin-top: 156px;
     }
 }
-@media screen and (min-width: 550px){
-    .App{
+
+@media screen and (min-width: 550px) {
+    .App {
         margin-top: 157px;
     }
 }
-@media screen and (min-width: 560px){
-    .App{
+
+@media screen and (min-width: 560px) {
+    .App {
         margin-top: 117px;
     }
 }
+
 @media screen and (min-width: 765px) {
-    .App{
+    .App {
         margin-top: 76px;
     }
 }
